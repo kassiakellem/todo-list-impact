@@ -1,8 +1,20 @@
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { CirclePlus } from 'lucide-react';
+import { useState } from "react";
 
 export default function Home() {
+  const [tasks, setTasks] = useState<string[]>([])
+  const [newTasks,setNewTasks] = useState("")
+
+  const addTask = ()=>{
+    if (newTasks.trim()=="")
+      return setTasks([...tasks,newTasks])
+      setNewTasks("")
+  }
+  const removeTask = (index: number)=>{
+    setTasks(tasks.filter((_, i)=> i !== index))
+  }
+
   return (
     <div className="flex  flex-col items-center justify-center h-screen gap-4">
       <div className="flex flex-col items-center justify-center">
@@ -13,8 +25,15 @@ export default function Home() {
 
 
       <div className="flex gap-2 p-2 rounded-md border border-gray-300 w-[448px]">
-        <Input placeholder="Adicione uma tarefa" className="outline-none bg-transparent ring-0 border-none shadow-none" />
-        <CirclePlus className="snap-center"/>
+        <Input placeholder="Adicione uma tarefa" 
+        className="outline-none bg-transparent ring-0 border-none shadow-none"
+        type="text"
+        value={newTasks}
+        onChange={(e) => setNewTasks(e.target.value)
+        } />
+        <CirclePlus
+         className="snap-center"
+         onClick={addTask}/>
       </div>
 
     </div>
