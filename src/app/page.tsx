@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
+import { CirclePlus } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
 
       <div className="flex gap-2 p-2 rounded-md border border-gray-300 w-[448px]">
         <Input placeholder="Adicione uma tarefa" className="outline-none bg-transparent ring-0 border-none shadow-none" />
-        <Button>Adicionar</Button>
+        <CirclePlus className="snap-center"/>
       </div>
 
     </div>
