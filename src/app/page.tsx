@@ -1,4 +1,6 @@
-import { Input } from "@/components/ui/input";
+"use client"
+
+import { Input } from "../components/ui/input";
 import { CirclePlus } from 'lucide-react';
 import { useState } from "react";
 
@@ -7,12 +9,16 @@ export default function Home() {
   const [newTasks,setNewTasks] = useState("")
 
   const addTask = ()=>{
-    if (newTasks.trim()=="")
-      return setTasks([...tasks,newTasks])
+    if (newTasks.trim()=== "")
+      return;
+    
+    setTasks([...tasks,newTasks])
+    
       setNewTasks("")
   }
   const removeTask = (index: number)=>{
     setTasks(tasks.filter((_, i)=> i !== index))
+
   }
 
   return (
@@ -32,9 +38,17 @@ export default function Home() {
         onChange={(e) => setNewTasks(e.target.value)
         } />
         <CirclePlus
-         className="snap-center"
+         className="w-8 h-8 text-blue-600 cursor-pointer hover:scale-110 transition-transform"
          onClick={addTask}/>
       </div>
+      <ul className="w-96">
+       {tasks.map((task, index) => (
+        <li key={index} className="bg-white p-2 mb-2 rounded shadow flex justify-between items-center">
+          <span>{task}</span>
+          <button onClick={() => removeTask(index)} className="text-red-500" > Deletar </button>
+        </li>
+       ))}
+      </ul>
 
     </div>
   );
